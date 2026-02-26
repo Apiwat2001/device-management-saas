@@ -20,7 +20,6 @@ export class DevicesService {
         },
       });
     } catch (error) {
-      // 🔥 ดัก unique constraint
       if (
         error instanceof Prisma.PrismaClientKnownRequestError &&
         error.code === 'P2002'
