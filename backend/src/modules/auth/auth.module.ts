@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { PrismaModule } from '../../prisma/prisma.module';
 import { JwtModule } from '@nestjs/jwt';
-import { JwtGuard } from '../../common/guards/jwt.guard'; // ✅ เพิ่มบรรทัดนี้
+import { JwtGuard } from '../../common/guards/jwt.guard';
 
 @Module({
   imports: [
@@ -13,7 +13,8 @@ import { JwtGuard } from '../../common/guards/jwt.guard'; // ✅ เพิ่ม
       signOptions: { expiresIn: "1d" },
     }),
   ],
-  providers: [AuthService, JwtGuard], // ✅ เพิ่ม JwtGuard ตรงนี้
+  providers: [AuthService, JwtGuard],
   controllers: [AuthController],
+  exports: [JwtModule, JwtGuard], 
 })
 export class AuthModule {}

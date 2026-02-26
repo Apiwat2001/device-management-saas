@@ -18,9 +18,28 @@ model User {
   password  String
   role      Role     @default(USER)
   createdAt DateTime @default(now())
+
+  devices Device[]
 }
 
 enum Role {
   ADMIN
   USER
+}
+
+model Device {
+  id           String   @id @default(uuid())
+  name         String
+  serialNumber String   @unique
+  status       Status   @default(ACTIVE)
+
+  ownerId String
+  owner   User @relation(fields: [ownerId], references: [id])
+
+  createdAt DateTime @default(now())
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
 }
