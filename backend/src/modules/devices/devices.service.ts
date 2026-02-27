@@ -49,4 +49,34 @@ export class DevicesService {
   });
 
 }
+
+async findOne(id: string, userId: string) {
+
+  return this.prisma.device.findFirst({
+    where: {
+      id: id,
+      ownerId: userId
+    }
+  });
+
+}
+
+async update(
+  id: string,
+  userId: string,
+  data: CreateDeviceDto
+) {
+
+  return this.prisma.device.update({
+    where: {
+      id: id
+    },
+    data: {
+      name: data.name,
+      serialNumber: data.serialNumber
+    }
+  });
+
+}
+
 }

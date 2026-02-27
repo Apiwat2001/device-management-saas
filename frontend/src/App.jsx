@@ -1,44 +1,35 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter,Routes,Route } from "react-router-dom";
 
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-import Devices from "./pages/Devices.jsx";
+import Devices from "./pages/Devices";
+import DeviceDetail from "./pages/DeviceDetail";
+import EditDevice from "./pages/EditDevice";
 
-function PrivateRoute({ children }) {
-  const token = localStorage.getItem("token");
-  return token ? children : <Navigate to="/" />;
+function App(){
+
+ return(
+
+<BrowserRouter>
+
+<Routes>
+
+<Route path="/" element={<Login/>}/>
+
+<Route path="/dashboard" element={<Dashboard/>}/>
+
+<Route path="/devices" element={<Devices/>}/>
+
+<Route path="/devices/:id" element={<DeviceDetail/>}/>
+
+<Route path="/devices/edit/:id" element={<EditDevice/>}/>
+
+</Routes>
+
+</BrowserRouter>
+
+)
+
 }
 
-function App() {
-  return (
-    <BrowserRouter>
-
-      <Routes>
-
-        <Route path="/" element={<Login />} />
-
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="/devices"
-          element={
-            <PrivateRoute>
-              <Devices />
-            </PrivateRoute>
-          }
-        />
-
-      </Routes>
-
-    </BrowserRouter>
-  );
-}
-
-export default App;
+export default App
