@@ -1,11 +1,4 @@
-import {
- Controller,
- Post,
- Get,
- Body,
- Req,
- UseGuards
-} from '@nestjs/common';
+import {Controller,Post,Get,Body,Req,UseGuards,Delete, Param} from '@nestjs/common';
 
 import { DevicesService } from './devices.service';
 import { CreateDeviceDto } from './dto/create-device.dto';
@@ -41,5 +34,19 @@ export class DevicesController {
    );
 
  }
+
+@UseGuards(JwtGuard)
+@Delete(':id')
+remove(
+  @Param('id') id: string,
+  @Req() req
+) {
+
+  return this.devicesService.remove(
+    id,
+    req.user.userId
+  );
+
+}
 
 }

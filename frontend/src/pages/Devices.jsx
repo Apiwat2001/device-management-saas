@@ -7,6 +7,14 @@ function Devices() {
   const [name, setName] = useState("");
   const [serialNumber, setSerialNumber] = useState("");
 
+  const deleteDevice = async (id) => {
+
+    await api.delete(`/devices/${id}`);
+
+    loadDevices();
+
+  };
+
   const loadDevices = async () => {
 
     const res = await api.get("/devices");
@@ -59,13 +67,19 @@ function Devices() {
 
       <hr/>
 
-      {devices.map(d => (
+    {devices.map(d => (
 
-        <div key={d.id}>
-          {d.name} - {d.serialNumber}
-        </div>
+      <div key={d.id}>
 
-      ))}
+        {d.name} - {d.serialNumber}
+
+        <button onClick={() => deleteDevice(d.id)}>
+          Delete
+        </button>
+
+      </div>
+
+    ))}
 
     </div>
 

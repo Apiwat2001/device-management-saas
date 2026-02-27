@@ -38,4 +38,15 @@ export class DevicesService {
       },
     });
   }
+
+  async remove(id: string, userId: string) {
+
+  return this.prisma.device.delete({
+    where: {
+      id: id,
+      ownerId: userId
+    }
+  });
+
+}
 }
