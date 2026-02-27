@@ -38,7 +38,7 @@ export default function Login() {
 
     localStorage.setItem("token",data.access_token);
 
-    window.location.href="/devices";
+    window.location.href="/dashboard";
 
   };
 

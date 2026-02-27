@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import Devices from "./pages/Devices";
 import DeviceDetail from "./pages/DeviceDetail";
 import EditDevice from "./pages/EditDevice";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App(){
 
@@ -16,13 +17,41 @@ function App(){
 
 <Route path="/" element={<Login/>}/>
 
-<Route path="/dashboard" element={<Dashboard/>}/>
+<Route
+ path="/dashboard"
+ element={
+   <ProtectedRoute>
+     <Dashboard/>
+   </ProtectedRoute>
+ }
+/>
 
-<Route path="/devices" element={<Devices/>}/>
+<Route
+ path="/devices"
+ element={
+   <ProtectedRoute>
+     <Devices/>
+   </ProtectedRoute>
+ }
+/>
 
-<Route path="/devices/:id" element={<DeviceDetail/>}/>
+<Route
+ path="/devices/:id"
+ element={
+   <ProtectedRoute>
+     <DeviceDetail/>
+   </ProtectedRoute>
+ }
+/>
 
-<Route path="/devices/edit/:id" element={<EditDevice/>}/>
+<Route
+ path="/devices/edit/:id"
+ element={
+   <ProtectedRoute>
+     <EditDevice/>
+   </ProtectedRoute>
+ }
+/>
 
 </Routes>
 
