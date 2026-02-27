@@ -9,9 +9,17 @@ function Devices() {
 
   const deleteDevice = async (id) => {
 
-    await api.delete(`/devices/${id}`);
+    try {
 
-    loadDevices();
+      await api.delete(`/devices/${id}`);
+
+      loadDevices();
+
+    } catch(err) {
+
+      console.log(err.response?.data);
+
+    }
 
   };
 
@@ -25,15 +33,23 @@ function Devices() {
 
   const addDevice = async () => {
 
-    await api.post("/devices", {
-      name: name,
-      serialNumber: serialNumber
-    });
+    try {
 
-    setName("");
-    setSerialNumber("");
+      await api.post("/devices", {
+        name: name,
+        serialNumber: serialNumber
+      });
 
-    loadDevices();
+      setName("");
+      setSerialNumber("");
+
+      loadDevices();
+
+    } catch (err) {
+
+      console.log(err.response?.data);
+
+    }
 
   };
 
@@ -69,9 +85,19 @@ function Devices() {
 
     {devices.map(d => (
 
-      <div key={d.id}>
+      <div
+        key={d.id}
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          width: "400px",
+          marginBottom: "10px"
+        }}
+      >
 
-        {d.name} - {d.serialNumber}
+        <div>
+          {d.name} - {d.serialNumber}
+        </div>
 
         <button onClick={() => deleteDevice(d.id)}>
           Delete
